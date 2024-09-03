@@ -18,15 +18,18 @@ model User {
   name  String
   email String
   pass  String
+  zaps Zap[]
 }
 
 
 model Zap{
   id  String  @id @default(uuid())
   triggerId  String
+  userId  Int
   trigger Trigger?
   actions Action[]
   zapRuns  ZapRun[]
+  user    User@relation(fields: [userId],references: [id])
 }
 
 model Trigger{

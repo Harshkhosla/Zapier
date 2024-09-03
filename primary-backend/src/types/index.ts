@@ -9,3 +9,12 @@ export const signinSchema = z.object({
     username:z.string(),
     pass:z.string()
 })
+
+export const ZapCreateSchema = z.object({
+    avalibletriggerId:z.string(),
+    triggerMetadata:z.any().optional(),
+    action:z.array(z.object({
+       avalibleactionId:z.string(),
+        actionMetadata:z.any().optional()
+    }))
+})
