@@ -25,7 +25,7 @@ router.post("/", middleware_1.authMiddleware, (req, res) => __awaiter(void 0, vo
             message: "Not valid persone"
         });
     }
-    yield db_1.prismaClient.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+    const zapId = yield db_1.prismaClient.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
         const zap = yield db_1.prismaClient.zap.create({
             data: {
                 userId: id,
@@ -52,7 +52,11 @@ router.post("/", middleware_1.authMiddleware, (req, res) => __awaiter(void 0, vo
                 triggerId: trigger.id
             }
         });
+        return zap.id;
     }));
+    return res.json({
+        zapId
+    });
 }));
 router.get("/", middleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // @ts-ignore

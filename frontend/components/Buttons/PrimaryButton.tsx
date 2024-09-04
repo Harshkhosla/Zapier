@@ -7,7 +7,7 @@ export const PrimaryButton=({children,onClick, size="small"}:{
 })=>{
     return <div  onClick={onClick}className={`${size==="small"?"text-sm":"text-lg font-semibold"} 
     ${size==="small"?"px-8 py-2":"px-12 py-4"} cursor-pointer   hover:shadow-lg bg-amber-700 
-    text-white rounded-full text-center`}>
+    text-white rounded-full text-center flex justify-center flex-col`}>
 
 {children}
     </div>
