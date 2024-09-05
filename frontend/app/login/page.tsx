@@ -8,7 +8,7 @@ import { useState } from "react";
 import { BACKEND_URL } from "../config";
 import { useRouter } from "next/navigation";
 
-export default function () {
+export default function Login() {
     const router = useRouter();
     const [email ,setEmail]=useState("")
     const [name ,setName]=useState("")
@@ -35,11 +35,11 @@ export default function () {
             </div>
             <div className="flex-1 pt-12 pb-12 mt-12 px-4 pr-8 border ">
                 
-                <Input lable={"Email"} onChange={e => {
+                <Input label={"Email"} onChange={e => {
                     setEmail(e.target.value)
 
                 }} type="text" placeholder="Your Email"></Input>
-                <Input lable={"password"} onChange={e => {
+                <Input label={"password"} onChange={e => {
                    
                     setPassword(e.target.value)
 
@@ -53,7 +53,7 @@ export default function () {
                     // name
                     })
                     localStorage.setItem("token",res.data.token)
-                    router.push("/dashbord")                
+                    router.push("/dashboard")                
             }} size = {"big"}> Get Started</PrimaryButton>
                 </div>
             </div>

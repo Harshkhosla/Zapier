@@ -8,7 +8,7 @@ import { useState } from "react";
 import { BACKEND_URL } from "../config";
 import { useRouter } from "next/navigation";
 
-export default function () {
+export default function Signup () {
     const router = useRouter();
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
@@ -33,13 +33,13 @@ export default function () {
                     </div>
                 </div>
                 <div className="flex-1 pt-12 pb-12 mt-12 px-4 pr-8 border ">
-                    <Input lable={"Name"} onChange={e => {
+                    <Input label={"Name"} onChange={e => {
                         setName(e.target.value)
                     }} type="text" placeholder="Your Name"></Input>
-                    <Input lable={"Email"} onChange={e => {
+                    <Input label={"Email"} onChange={e => {
                         setEmail(e.target.value)
                     }} type="text" placeholder="Your Email"></Input>
-                    <Input lable={"password"} onChange={e => {
+                    <Input label={"password"} onChange={e => {
                         setPassword(e.target.value)
                     }} type="password" placeholder="Password"></Input>
                     <div className="pt-4">
