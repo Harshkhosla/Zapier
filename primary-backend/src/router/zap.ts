@@ -29,6 +29,7 @@ const zapId = await prismaClient.$transaction(async tx=>{
                 create:parsData.data.action.map((x,index)=>({
                     actionId:x.avalibleactionId,
                     sortingOrder:index,
+                    metadata: x.actionMetadata
                 }))        
             }
         }

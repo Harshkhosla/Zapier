@@ -58,7 +58,7 @@ export default function Zap() {
                     "triggerMetadata": {},
                     "action": selectedActions.map(a => ({
                         avalibleactionId: a.availableActionId,
-                        actionMetadata: {}
+                        actionMetadata: a.metadata
                     }))
                 }, {
                     headers: {
