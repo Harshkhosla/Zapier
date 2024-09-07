@@ -14,60 +14,66 @@ datasource db {
 }
 
 model User {
-  id    Int   @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   name  String
   email String
   pass  String
+  zaps  Zap[]
 }
 
-
-model Zap{
-  id  String  @id @default(uuid())
-  triggerId  String
-  trigger Trigger?
-  actions Action[]
-  zapRuns  ZapRun[]
-}
-
-model Trigger{
-  id     String  @id @default(uuid())
-  zapId  String @unique
+model Zap {
+  id        String   @id @default(uuid())
   triggerId String
-  type AvalibleTrigger @relation(fields: [triggerId],references: [id])
-  zap Zap  @relation(fields: [zapId],references: [id])
+  userId    Int
+  trigger   Trigger?
+  actions   Action[]
+  zapRuns   ZapRun[]
+  user      User     @relation(fields: [userId], references: [id])
 }
 
-model Action{
-id  String @id @default(uuid())
-zapId String
-zap Zap    @relation (fields: [zapId],references: [id])
-actionId String
-type AvalibleAction @relation(fields: [actionId],references: [id])
-  sortingOrder Int @default(0)
+model Trigger {
+  id        String          @id @default(uuid())
+  zapId     String          @unique
+  triggerId String
+  metadata    Json  @default("{}")
+  type      AvalibleTrigger @relation(fields: [triggerId], references: [id])
+  zap       Zap             @relation(fields: [zapId], references: [id])
 }
 
-model  AvalibleAction{
-id String @id @default(uuid())
-  name String
+model Action {
+  id           String         @id @default(uuid())
+  zapId        String
+  zap          Zap            @relation(fields: [zapId], references: [id])
+  actionId     String
+  metadata    Json  @default("{}")
+  type         AvalibleAction @relation(fields: [actionId], references: [id])
+  sortingOrder Int            @default(0)
+}
+
+model AvalibleAction {
+  id      String   @id @default(uuid())
+  name    String
+  image   String
   actions Action[]
 }
-model AvalibleTrigger{
-  id String @id @default(uuid())
-  name String
+
+model AvalibleTrigger {
+  id       String    @id @default(uuid())
+  name     String
+  image     String
   triggers Trigger[]
 }
 
-model  ZapRun {
-  id String @id @default(uuid())
-  zapId String
-  metadata Json
-  zap  Zap @relation(fields: [zapId],references: [id])
+model ZapRun {
+  id           String        @id @default(uuid())
+  zapId        String
+  metadata     Json
+  zap          Zap           @relation(fields: [zapId], references: [id])
   zapRunOutBox ZapRunOutbox?
 }
 
-
 model ZapRunOutbox {
-  id String @id @default(uuid())
+  id       String @id @default(uuid())
   zapRunId String @unique
-  ZapRun ZapRun @relation(fields: [zapRunId],references: [id])
+  ZapRun   ZapRun @relation(fields: [zapRunId], references: [id])
 }
