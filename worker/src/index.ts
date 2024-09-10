@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { JsonObject } from "@prisma/client/runtime/library";
 import { Kafka ,Partitioners} from "kafkajs";
 import { parse } from "./parser";
-// import { sendEmail }  from "./email"
+import { sendEmail }  from "./email"
 import { sendSol } from "./solana";
 
 const TOPIC_NAME = "zap-events"
@@ -66,10 +66,12 @@ async function main() {
       const zapRunMetadata = zapRunDetails?.metadata;
 
       if (currentAction.type.id === "email") {
+        const body = "kcshjdabdbsjdbsjvbshjvbhdjvb";
         // const body = parse((currentAction.metadata as JsonObject)?.body as string, zapRunMetadata);
         // const to = parse((currentAction.metadata as JsonObject)?.email as string, zapRunMetadata);
-        // console.log(`Sending out email to ${to} body is ${body}`)
-        // await sendEmail(to, body);
+        const to = "harshkhosla9945@gmail.com";
+        console.log(`Sending out email to ${to} body is ${body}`)
+        await sendEmail(to, body);
         console.log(`Sending out email to  body is `)
       }
 

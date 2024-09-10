@@ -18,6 +18,7 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
+    "@types/nodemailer": "^6.4.15",
     "prisma": "^5.19.1"
   }
 }

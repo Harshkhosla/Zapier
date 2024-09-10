@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // require('dotenv').config()
 const client_1 = require("@prisma/client");
 const kafkajs_1 = require("kafkajs");
+const email_1 = require("./email");
 const TOPIC_NAME = "zap-events";
 const client = new client_1.PrismaClient();
 const kafka = new kafkajs_1.Kafka({
@@ -65,10 +66,12 @@ function main() {
                 }
                 const zapRunMetadata = zapRunDetails === null || zapRunDetails === void 0 ? void 0 : zapRunDetails.metadata;
                 if (currentAction.type.id === "email") {
+                    const body = "kcshjdabdbsjdbsjvbshjvbhdjvb";
                     // const body = parse((currentAction.metadata as JsonObject)?.body as string, zapRunMetadata);
                     // const to = parse((currentAction.metadata as JsonObject)?.email as string, zapRunMetadata);
-                    // console.log(`Sending out email to ${to} body is ${body}`)
-                    // await sendEmail(to, body);
+                    const to = "harshkhosla9945@gmail.com";
+                    console.log(`Sending out email to ${to} body is ${body}`);
+                    yield (0, email_1.sendEmail)(to, body);
                     console.log(`Sending out email to  body is `);
                 }
                 if (currentAction.type.id === "send-sol") {
