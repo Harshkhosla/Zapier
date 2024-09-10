@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [frontend, hooks, primary-backend, processor, worker]
+        service: [ hooks, primary-backend, processor, worker]
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
