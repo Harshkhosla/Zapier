@@ -1,4 +1,4 @@
-# Use the official Node.js 14 as a parent image
+# Use the official Node.js 18 as a parent image
 FROM node:18
 
 # Set the working directory in the container
@@ -13,11 +13,11 @@ RUN npm install
 # Copy the rest of your application code
 COPY . .
 
-# Generate Prisma Client
+# Ensure the database is migrated before starting the app
 RUN npx prisma generate
 
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Command to run your app
-CMD ["node", "dist/index.js"]
+# Ensure Prisma migrations are applied before running the app
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]

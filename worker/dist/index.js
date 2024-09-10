@@ -17,7 +17,8 @@ const TOPIC_NAME = "zap-events";
 const client = new client_1.PrismaClient();
 const kafka = new kafkajs_1.Kafka({
     clientId: 'Outbox-processor-2',
-    brokers: ['localhost:9092']
+    // brokers: ['localhost:9092']
+    brokers: ['kafka:9092']
 });
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
