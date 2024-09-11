@@ -19,5 +19,5 @@ RUN npx prisma generate
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Ensure Prisma migrations are applied before running the app
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
+# Ensure Prisma migrations are applied, seed the database, and start the app
+CMD ["sh", "-c", "npx prisma migrate deploy && node prisma/seed.js && node dist/index.js"]
