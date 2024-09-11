@@ -49,7 +49,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.0.1  # Use a more modern Zookeeper image
+    image: confluentinc/cp-zookeeper:7.0.1
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -64,9 +64,12 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092  # Listening on all interfaces
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_HEAP_OPTS: "-Xmx32M -Xms32M"
+      KAFKA_LOG_DIRS: /mnt/kafka-logs   # Location on the mounted EBS volume for Kafka logs
+    volumes:
+      - /mnt/kafka-logs:/mnt/kafka-logs # Mount the EBS volume
     depends_on:
       - zookeeper
 
