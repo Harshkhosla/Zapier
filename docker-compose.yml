@@ -66,7 +66,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://54.173.126.56:9092,PLAINTEXT://kafka:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_HEAP_OPTS: "-Xmx32M -Xms32M"
+      KAFKA_HEAP_OPTS: "-Xmx256M -Xms256M"
       KAFKA_LOG_DIRS: /mnt/kafka-logs   # Location on the mounted EBS volume for Kafka logs
     volumes:
       - /mnt/kafka-logs:/mnt/kafka-logs # Mount the EBS volume
