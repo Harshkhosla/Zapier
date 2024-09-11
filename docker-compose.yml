@@ -57,7 +57,7 @@ services:
       - "2181:2181"
 
   kafka:
-  image: wurstmeister/kafka:2.13-2.7.0
+  image: apache/kafka-native:3.8.0
   ports:
     - "9092:9092"
   environment:
