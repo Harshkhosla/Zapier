@@ -10,23 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [ hooks, primary-backend, processor, worker]
+        service: [hooks, primary-backend, processor, worker]  # Services to build and push
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: harsh9945
+          password: Gcpc24i3cc!
 
-    - name: Build and push Docker image
-      run: |
-        docker build -t myregistry/${{ matrix.service }}:latest ./${{ matrix.service }}
-        docker push myregistry/${{ matrix.service }}:latest
-
-    # Add deployment steps here, for instance, SSH into EC2 and pull the latest Docker image
+      - name: Build and push Docker image
+        run: |
+          docker build -t myregistry/${{ matrix.service }}:latest ./${{ matrix.service }}
+          docker push myregistry/${{ matrix.service }}:latest

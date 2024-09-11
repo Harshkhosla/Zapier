@@ -11,6 +11,8 @@ services:
     build: ./worker
     ports:
       - "3004:3004"
+    environment:
+      DATABASE_URL: postgresql://postgres:harsh@postgres:5432/postgres  
     depends_on:
       - primary-backend
       - kafka
@@ -29,6 +31,8 @@ services:
     build: ./hooks
     ports:
       - "3002:3002"
+    environment:
+      DATABASE_URL: postgresql://postgres:harsh@postgres:5432/postgres  
     depends_on:
       - primary-backend
       - kafka
