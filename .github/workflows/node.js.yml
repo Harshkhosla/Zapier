@@ -30,15 +30,15 @@ jobs:
           docker build -t harsh9945/${{ matrix.service }}:latest ./${{ matrix.service }}
           docker push harsh9945/${{ matrix.service }}:latest
 
-      - name: Set up SSH agent
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+      # - name: Set up SSH agent
+      #   uses: webfactory/ssh-agent@v0.5.3
+      #   with:
+      #     ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Deploy to EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << EOF
-            cd /home/ec2-user/mycarelabs
-            docker-compose pull
-            docker-compose up -d
-          EOF
+      # - name: Deploy to EC2
+      #   run: |
+      #     ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << EOF
+      #       cd /home/ec2-user/mycarelabs
+      #       docker-compose pull
+      #       docker-compose up -d
+      #     EOF
