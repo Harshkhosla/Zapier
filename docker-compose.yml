@@ -66,7 +66,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092  # Listening on all interfaces
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_HEAP_OPTS: "-Xmx64M -Xms64M"
+      KAFKA_HEAP_OPTS: "-Xmx32M -Xms32M"
     depends_on:
       - zookeeper
 
