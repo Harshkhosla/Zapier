@@ -2,7 +2,7 @@
 FROM node:18
 
 # Set the working directory in the container
-WORKDIR /usr
+WORKDIR /usr/dist/index
 
 # Copy the package.json and package-lock.json (if available)
 COPY package*.json ./
@@ -13,14 +13,11 @@ RUN npm install
 # Copy the rest of your application code
 COPY . .
 
-# Ensure the Prisma client is generated
+# Ensure the database is migrated before starting the app
 RUN npx prisma generate
 
 # Expose the port the app runs on
 EXPOSE 3000
 
-# Compile TypeScript (if needed) before starting the app
-RUN npm run build
-
-# Ensure Prisma migrations are applied, seed the database, and start the app
-CMD ["sh", "-c", "npx prisma migrate deploy && node prisma/seed.js && node dist/index.js"]
+# Ensure Prisma migrations are applied before running the app
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
